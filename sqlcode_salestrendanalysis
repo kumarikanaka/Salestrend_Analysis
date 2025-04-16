@@ -1,0 +1,39 @@
+-- Step 1: Drop the table if it already exists
+DROP TABLE IF EXISTS orders4;
+
+-- Step 2: Create the table
+CREATE TABLE orders4 (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    product_id INT,
+    quantity INT,
+    price DECIMAL(10,2),
+    amount DECIMAL(10,2),
+    order_date DATE
+);
+
+-- Step 3: Insert sample data
+INSERT INTO orders4 (order_id, customer_id, product_id, quantity, price, amount, order_date) VALUES
+(1001, 501, 301, 2, 25.00, 50.00, '2023-01-05'),
+(1002, 502, 305, 1, 75.00, 75.00, '2023-01-10'),
+(1003, 503, 302, 3, 10.00, 30.00, '2023-02-02'),
+(1004, 501, 301, 1, 25.00, 25.00, '2023-02-10'),
+(1005, 504, 303, 2, 45.00, 90.00, '2023-03-15'),
+(1006, 505, 306, 1, 100.00, 100.00, '2023-03-28');
+
+SELECT * FROM orders4;
+
+
+
+SELECT
+  EXTRACT(YEAR FROM order_date) AS year,
+  EXTRACT(MONTH FROM order_date) AS month,
+  COUNT(DISTINCT order_id) AS total_orders,
+  SUM(amount) AS total_revenue
+FROM orders4
+GROUP BY year, month
+ORDER BY year, month;
+
+Limit results for specific time period
+SELECT *FROM orders4
+WHERE YEAR(order_date) = 2023 AND MONTH(order_date) = 3;
