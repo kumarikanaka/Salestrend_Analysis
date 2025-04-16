@@ -1,0 +1,39 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Text To Word</title></head><body><p class="MsoNormal">-- Step 1: Drop the table if it already exists</p>
+<p class="MsoNormal">DROP TABLE IF EXISTS orders4;</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal">-- Step 2: Create the table</p>
+<p class="MsoNormal">CREATE TABLE orders4 (</p>
+<p class="MsoNormal"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>order_id INT PRIMARY KEY,</p>
+<p class="MsoNormal"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>customer_id INT,</p>
+<p class="MsoNormal"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>product_id INT,</p>
+<p class="MsoNormal"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>quantity INT,</p>
+<p class="MsoNormal"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>price DECIMAL(10,2),</p>
+<p class="MsoNormal"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>amount DECIMAL(10,2),</p>
+<p class="MsoNormal"><span style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp; </span>order_date DATE</p>
+<p class="MsoNormal">);</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal">-- Step 3: Insert sample data</p>
+<p class="MsoNormal">INSERT INTO orders4 (order_id, customer_id, product_id, quantity, price, amount, order_date) VALUES</p>
+<p class="MsoNormal">(1001, 501, 301, 2, 25.00, 50.00, '2023-01-05'),</p>
+<p class="MsoNormal">(1002, 502, 305, 1, 75.00, 75.00, '2023-01-10'),</p>
+<p class="MsoNormal">(1003, 503, 302, 3, 10.00, 30.00, '2023-02-02'),</p>
+<p class="MsoNormal">(1004, 501, 301, 1, 25.00, 25.00, '2023-02-10'),</p>
+<p class="MsoNormal">(1005, 504, 303, 2, 45.00, 90.00, '2023-03-15'),</p>
+<p class="MsoNormal">(1006, 505, 306, 1, 100.00, 100.00, '2023-03-28');</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal">SELECT * FROM orders4;</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal">SELECT</p>
+<p class="MsoNormal"><span style="mso-spacerun: yes;">&nbsp; </span>EXTRACT(YEAR FROM order_date) AS year,</p>
+<p class="MsoNormal"><span style="mso-spacerun: yes;">&nbsp; </span>EXTRACT(MONTH FROM order_date) AS month,</p>
+<p class="MsoNormal"><span style="mso-spacerun: yes;">&nbsp; </span>COUNT(DISTINCT order_id) AS total_orders,</p>
+<p class="MsoNormal"><span style="mso-spacerun: yes;">&nbsp; </span>SUM(amount) AS total_revenue</p>
+<p class="MsoNormal">FROM orders4</p>
+<p class="MsoNormal">GROUP BY year, month</p>
+<p class="MsoNormal">ORDER BY year, month;</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal">Limit results for specific time period</p>
+<p class="MsoNormal">SELECT *FROM orders4</p>
+<p class="MsoNormal">WHERE YEAR(order_date) = 2023 AND MONTH(order_date) = 3;</p></body></html>
